@@ -62,7 +62,7 @@
             <!-- 로그인 전 -->
             <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="logoutstate">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="enjoytrip?action=">회원가입</a>
+                <a class="nav-link" aria-current="page" href="enjoytrip?action=mvregister">회원가입</a>
               </li>
               <li class="nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <a class="nav-link" aria-current="page" href="#">로그인</a>
