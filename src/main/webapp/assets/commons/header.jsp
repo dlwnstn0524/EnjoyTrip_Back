@@ -10,7 +10,14 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-
+	
+	<link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+	
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,10 +47,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="public_data.html">지역별관광지</a>
+                <a class="nav-link" aria-current="page" href="enjoytrip?action=">지역별관광지</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="trip_plan.html">나의여행계획</a>
+                <a class="nav-link" aria-current="page" href="enjoytrip?action=">나의여행계획</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">핫플자랑하기</a>
@@ -55,7 +62,7 @@
             <!-- 로그인 전 -->
             <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="logoutstate">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="join.html">회원가입</a>
+                <a class="nav-link" aria-current="page" href="enjoytrip?action=">회원가입</a>
               </li>
               <li class="nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <a class="nav-link" aria-current="page" href="#">로그인</a>
