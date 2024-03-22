@@ -9,12 +9,12 @@
           <form class="validation-form" novalidate>
             <div class="mb-3">
               <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" required />
+              <input type="text" class="form-control" id="name" value="${m.name }" required />
             </div>
 
             <div class="mb-3">
               <label for="userId">아이디</label>
-              <input type="text" class="form-control" id="userid" required />
+              <input type="text" class="form-control" id="userid" value="${m.id }" readonly="readonly" required />
               <div class="invalid-feedback">아이디를 입력해주세요.</div>
             </div>
 
@@ -37,6 +37,7 @@
                 class="form-control"
                 placeholder="you@example.com"
                 id="email"
+                value = "${m.email }"
                 required
               />
             </div>

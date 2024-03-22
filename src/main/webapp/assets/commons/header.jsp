@@ -32,7 +32,7 @@
     <div id="header">
       <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
         <div class="container">
-          <a class="navbar-brand text-primary fw-bold" href="main.html">
+          <a class="navbar-brand text-primary fw-bold" href="enjoytrip?action=init">
             <img src="./assets/img/logo.PNG" alt="" width="60" />
             EnjoyTrip!
           </a>
@@ -77,15 +77,19 @@
             <c:if test="${login!=null }">
             <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="loginstate">
               <li class="nav-item">
+                ${login }님 어서오세요. 
+                
+              </li>
+              <li class="nav-item">
                 <a
                   class="nav-link"
                   aria-current="page"
                   href="enjoytrip?action=logout"
-                  >로그아웃</a
+                  > 로그아웃</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="mypage.html">마이페이지</a>
+                <a class="nav-link" aria-current="page" href="enjoytrip?action=mvmypage">마이페이지</a>
               </li>
             </ul>
             </c:if>

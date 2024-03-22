@@ -26,9 +26,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void myPage() throws Exception{
+	public Member getMember(String id) throws Exception {
 		// TODO Auto-generated method stub
-		mDao.myPage();
+		return mDao.getMember(id);
 	}
 
 	@Override

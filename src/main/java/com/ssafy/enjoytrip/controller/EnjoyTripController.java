@@ -64,8 +64,10 @@ public class EnjoyTripController extends HttpServlet {
 				url = "";
 			} else if (action.equals("delete")) {
 				url = "";
+			} else if (action.equals("mvmypage")) {
+				url = myPage(request, response);
 			} else if (action.equals("mypage")) {
-				url = "";
+				url = "/myPage.jsp";
 			} else if (action.equals("init")) {
 				url = "/index.jsp";
 			}
@@ -88,26 +90,13 @@ public class EnjoyTripController extends HttpServlet {
 		}
 	}
 	
-	private String logout(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		session.invalidate();
-		
-		Cookie[] cookies = request.getCookies();
-		for (Cookie c: cookies) {
-			if (c.getName() == "login") {
-				c.setMaxAge(0);
-				response.addCookie(c);
-			}
-		}
-		return "/enjoytrip?action=init";
-	}
-
 	private String register(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String email = request.getParameter("email");
+		String name = request.getParameter("name");
 		System.out.println(id + " " + pw + " " + email);
-		mSer.register(new Member(id, pw, email));
+		mSer.register(new Member(id, pw, email, name));
 		// register 주소 매핑
 		// 이후 마이페이지로 수정?
 		return "/enjoytrip?action=index.jsp";
@@ -129,5 +118,26 @@ public class EnjoyTripController extends HttpServlet {
 			return "redirect:/enjoytrip?action=loginFailed";
 		}
 		return "redirect:/enjoytrip?action=init";
+	}
+	
+	private String logout(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		Cookie[] cookies = request.getCookies();
+		for (Cookie c: cookies) {
+			if (c.getName() == "login") {
+				c.setMaxAge(0);
+				response.addCookie(c);
+			}
+		}
+		return "/enjoytrip?action=init";
+	}
+	
+	private String myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Member m = mSer.getMember((String)request.getSession().getAttribute("login"));
+		request.setAttribute("m", m);
+		System.out.println(m);
+		return "/enjoytrip?action=mypage";
 	}
 }

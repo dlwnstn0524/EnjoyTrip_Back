@@ -25,20 +25,31 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void register(Member m) throws SQLException {
 		Connection conn = DBUtil.getConnection();
-		String sql = "insert into member(id, pw, email) "
-				+ " values(?,?,?)";
+		String sql = "insert into member(id, pw, email, name) "
+				+ " values(?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.getId());
 		pstmt.setString(2, m.getPw());
 		pstmt.setString(3, m.getEmail());
+		pstmt.setString(4, m.getName());
 		pstmt.executeUpdate();
 		conn.close();	
 	}
 
 	@Override
-	public void myPage() {
+	public Member getMember(String id) throws Exception {
+		Connection conn = DBUtil.getConnection();
+		String sql = "SELECT * FROM member WHERE id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		rs.next();
 		
-		
+		Member m = new Member();
+		m.setId(rs.getString("id"));
+		m.setEmail(rs.getString("email"));
+		m.setName(rs.getString("name"));
+		return m;
 	}
 
 	@Override
