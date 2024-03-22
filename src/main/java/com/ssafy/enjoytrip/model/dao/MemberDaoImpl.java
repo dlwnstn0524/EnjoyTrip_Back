@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.ssafy.enjoytip.dto.Member;
+import com.ssafy.enjoytrip.dto.Member;
 import com.ssafy.util.DBUtil;
 
 public class MemberDaoImpl implements MemberDao{

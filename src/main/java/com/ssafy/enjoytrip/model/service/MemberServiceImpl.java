@@ -1,6 +1,6 @@
 package com.ssafy.enjoytrip.model.service;
 
-import com.ssafy.enjoytip.dto.Member;
+import com.ssafy.enjoytrip.dto.Member;
 import com.ssafy.enjoytrip.model.dao.MemberDao;
 import com.ssafy.enjoytrip.model.dao.MemberDaoImpl;
 

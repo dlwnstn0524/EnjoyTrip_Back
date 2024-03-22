@@ -1,11 +1,22 @@
-package com.ssafy.enjoytip.dto;
+package com.ssafy.enjoytrip.dto;
 
 public class Member {
-	//private String uuid 
+	private int uuid; 
 	private String id;
 	private String pw;
 	private String email;
 	
+	public int getUuid() {
+		return uuid;
+	}
+
+	public Member(String id, String pw, String email) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.email = email;
+	}
+
 	public String getId() {
 		return id;
 	}

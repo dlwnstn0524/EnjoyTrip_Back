@@ -1,6 +1,6 @@
 package com.ssafy.enjoytrip.model.service;
 
-import com.ssafy.enjoytip.dto.Member;
+import com.ssafy.enjoytrip.dto.Member;
 
 public interface MemberService {
 	public void register(Member m) throws Exception;

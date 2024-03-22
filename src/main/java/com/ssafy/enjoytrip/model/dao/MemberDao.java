@@ -1,6 +1,6 @@
 package com.ssafy.enjoytrip.model.dao;
 
-import com.ssafy.enjoytip.dto.Member;
+import com.ssafy.enjoytrip.dto.Member;
 
 public interface MemberDao {
 	public void register(Member m) throws Exception;
