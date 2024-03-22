@@ -1,26 +1,3 @@
-    // index page 로딩 후 전국의 시도 설정.
-    let serviceKey =
-      "98bjcTT737wV9WBAYZJCG44LYmmdDeoYCYochcob51sm%2BEj%2FzxuTjjGdOI37R2tJOK0JEHgh4%2Fxeg4f2YYCNCw%3D%3D";
-    let areaUrl =
-      "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
-      serviceKey +
-      "&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
-    fetch(areaUrl, { method: "GET" })
-      .then((response) => response.json())
-      .then((data) => makeOption(data));
-
-    function makeOption(data) {
-      let areas = data.response.body.items.item;
-      let sel = document.getElementById("search-area");
-      areas.forEach((area) => {
-        let opt = document.createElement("option");
-        opt.setAttribute("value", area.code);
-        opt.appendChild(document.createTextNode(area.name));
-
-        sel.appendChild(opt);
-      });
-    }
-
     window.onload = function () {
         const session = JSON.parse(localStorage.getItem("isLogin"));
         console.log(session);
@@ -37,36 +14,7 @@
         }
       };
   
-      function login() {
-        const inputId = document.querySelector("#userid").value;
-        const inputPw = document.querySelector("#passWord").value;
-        console.log(inputId);
-        console.log(inputPw);
-  
-        const data = JSON.parse(localStorage.getItem("register"));
-        const id = data.userid;
-        const pw = data.passWord;
-  
-        console.log(id);
-        console.log(pw);
-        if (inputId === id && inputPw === pw) {
-          alert("로그인 성공!");
-          window.location.href = "main.html";
-          localStorage.setItem("isLogin", JSON.stringify(true));
-          const wrapper = document.querySelector("#loginstate");
-          wrapper.setAttribute("style", "display:block");
-          wrapper = document.querySelector("#logoutstate");
-          wrapper.setAttribute("style", "display:none");
-        } else {
-          alert("아이디 비밀번호를 확인해주세요");
-        }
-      }
-  
-      function logout() {
-        localStorage.setItem("isLogin", JSON.stringify(false));
-        return;
-      }
-  
+       
       // 마커를 담을 배열입니다
       var markers = [];
       var overlays = [];

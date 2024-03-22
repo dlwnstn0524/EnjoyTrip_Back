@@ -11,13 +11,17 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
+import com.ssafy.enjoytrip.dto.Attraction;
 import com.ssafy.enjoytrip.dto.Member;
 import com.ssafy.enjoytrip.exception.AuthenticationException;
 import com.ssafy.enjoytrip.model.dao.MemberDao;
 import com.ssafy.enjoytrip.model.dao.MemberDaoImpl;
 import com.ssafy.enjoytrip.model.service.MemberService;
 import com.ssafy.enjoytrip.model.service.MemberServiceImpl;
+import com.ssafy.enjoytrip.model.service.TripService;
+import com.ssafy.enjoytrip.model.service.TripServiceImpl;
 
 @WebServlet("/enjoytrip")
 public class EnjoyTripController extends HttpServlet {
@@ -25,6 +29,7 @@ public class EnjoyTripController extends HttpServlet {
        
 	private MemberService mSer;
 	private MemberDao mDao;
+	private TripService tSer;
 	
     public EnjoyTripController() {
         super();
@@ -35,6 +40,7 @@ public class EnjoyTripController extends HttpServlet {
 		super.init();
 		mSer = MemberServiceImpl.getInstance();
 		mDao = MemberDaoImpl.getInstance();
+		tSer = TripServiceImpl.getInstance();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -68,6 +74,8 @@ public class EnjoyTripController extends HttpServlet {
 				url = "";
 			} else if (action.equals("init")) {
 				url = "/index.jsp";
+			} else if (action.equals("local")) {
+				url = local(request, response);
 			}
 		} catch (SQLIntegrityConstraintViolationException e) {
 			e.printStackTrace();
@@ -88,6 +96,13 @@ public class EnjoyTripController extends HttpServlet {
 		}
 	}
 	
+	private String local(HttpServletRequest request, HttpServletResponse response) {
+		List<Attraction> allSido = tSer.getAllSido();
+		request.setAttribute("dto", allSido);
+		System.out.println(allSido);
+		return "/publicData.jsp";
+	}
+
 	private String register(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");

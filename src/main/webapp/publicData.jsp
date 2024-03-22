@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 	<link rel="stylesheet" href="./assets/css/public_data.css" />
     <%@ include file="./assets/commons/header.jsp" %>
+    <%@ taglib prefix="c" uri="jakarta.tags.core" %>
     <div class="container">
 	<div class="col" style="margin-top: 100px">
         <form role="search" onsubmit="searchPlaces(); return false;">
           <div class="row justify-content-center">
             <div class="col-md-3 text-center">
+            
               <select id="search-area" class="form-select mb-3" aria-label="Default select example">
                 <option value="0" selected>검색 할 지역 선택</option>
+                <c:forEach var="sido" items="${dto}">
+            	<option value="${sido.sidoCode}">${sido.sidoName}</option>
+	            </c:forEach>
               </select>
             </div>
             <div class="col-md-3 text-center">
@@ -54,23 +58,6 @@
 	</div>
 	<%@ include file="./assets/commons/footer.jsp" %>
 
-<script>
-  window.onload = function() {
-    const session = JSON.parse(localStorage.getItem("isLogin"));
-    console.log(session);
-    if (session == true) {
-      const wrapper = document.querySelector("#loginstate");
-      wrapper.setAttribute("style", "display:flex");
-      const wrapper1 = document.querySelector("#logoutstate");
-      wrapper1.setAttribute("style", "display:none");
-    } else {
-      const wrapper = document.querySelector("#logoutstate");
-      wrapper.setAttribute("style", "display:flex");
-      const wrapper1 = document.querySelector("#loginstate");
-      wrapper1.setAttribute("style", "display:none");
-    }
-  }
-</script>
 <script
     type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d7653085a7d54c6d8dbbdb60e5fb00ef&libraries=services,clusterer,drawing"
