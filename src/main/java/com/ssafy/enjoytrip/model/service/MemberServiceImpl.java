@@ -44,9 +44,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void deleteMember(String id) throws Exception {
+	public void deleteMember(String id, String pw) throws Exception {
 		// TODO Auto-generated method stub
-		mDao.deleteMember(id);
+		mDao.deleteMember(id, pw);
 	}
 
 }

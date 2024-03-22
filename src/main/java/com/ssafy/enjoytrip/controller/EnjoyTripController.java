@@ -63,7 +63,7 @@ public class EnjoyTripController extends HttpServlet {
 			} else if (action.equals("update")) {
 				url = update(request, response);
 			} else if (action.equals("delete")) {
-				url = "";
+				url = delete(request, response);
 			} else if (action.equals("mvmypage")) {
 				url = myPage(request, response);
 			} else if (action.equals("mypage")) {
@@ -148,6 +148,14 @@ public class EnjoyTripController extends HttpServlet {
 		m.setName(name);
 		mSer.updateMember(m);
 		return "redirect:/enjoytrip?action=myPage";
+	}
+	
+	private String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("Delete");
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		mSer.deleteMember(id, pw);
+		return "redirect:/enjoytrip?action=init";
 	}
 	
 	private String myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {

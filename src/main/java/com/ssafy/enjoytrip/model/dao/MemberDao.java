@@ -7,5 +7,5 @@ public interface MemberDao {
 	public Member getMember(String id) throws Exception;
 	public void login(String id, String pw) throws Exception;
 	public void updateMember(Member m) throws Exception;
-	public void deleteMember(String id) throws Exception;
+	public void deleteMember(String id, String pw) throws Exception;
 }

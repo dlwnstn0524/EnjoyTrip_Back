@@ -79,8 +79,22 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public void deleteMember(String id) {
-		
+	public void deleteMember(String id, String pw) throws Exception {
+		System.out.println("delete id: " + id + " pw: " + pw);
+		Connection conn = DBUtil.getConnection();
+		String sql = "SELECT uuid FROM member WHERE id=? and pw=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		pstmt.setString(2, pw);
+		ResultSet rs = pstmt.executeQuery();
+		if (!rs.next()) {
+			throw new AuthenticationException("알맞지 않은 입력입니다. 다시 시도하세요.");
+		}
+		sql = "delete from members where id = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		pstmt.executeUpdate();
+		conn.close();
 	}
 
 }
