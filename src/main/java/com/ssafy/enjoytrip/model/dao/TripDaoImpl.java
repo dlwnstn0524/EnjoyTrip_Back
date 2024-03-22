@@ -42,4 +42,36 @@ public class TripDaoImpl implements TripDao{
 		return list;
 	}
 
+	@Override
+	public List<Attraction> getAttractionList(Attraction dto) {
+		List<Attraction> list = new ArrayList<>();
+		try {
+			Connection conn = DBUtil.getConnection();
+			String sql = "select *"
+					+ " from attraction_info"
+					+ " where content_type_id = ? and sido_code = ? and title like ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getContentTypeId());
+			pstmt.setInt(2, dto.getSidoCode());
+			pstmt.setString(3, "%" + dto.getTitle() + "%");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(new Attraction(rs.getInt("content_id"),
+						rs.getInt("content_type_id"),
+		                rs.getString("title"),
+		                rs.getString("addr1"),
+		                rs.getString("first_image"),
+		                rs.getInt("sido_code"),
+		                rs.getInt("gugun_code"), 
+		                rs.getString("latitude"), 
+		                rs.getString("longitude")));
+			}
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

@@ -76,6 +76,8 @@ public class EnjoyTripController extends HttpServlet {
 				url = "/index.jsp";
 			} else if (action.equals("local")) {
 				url = local(request, response);
+			} else if (action.equals("tripSearch")) {
+				url = tripSearch(request, response);
 			}
 		} catch (SQLIntegrityConstraintViolationException e) {
 			e.printStackTrace();
@@ -96,10 +98,20 @@ public class EnjoyTripController extends HttpServlet {
 		}
 	}
 	
+	private String tripSearch(HttpServletRequest request, HttpServletResponse response) {
+		
+		int sidoCode = Integer.parseInt(request.getParameter("sidoCode"));
+		int contentTypeId = Integer.parseInt(request.getParameter("contentTypeId"));
+		String keyword = request.getParameter("keyword");
+		Attraction dto = new Attraction(contentTypeId, keyword, sidoCode);
+		List<Attraction> list = tSer.tripSearch(dto);
+		System.out.println(list);
+		return "/enjoytrip?action=index.jsp";
+	}
+
 	private String local(HttpServletRequest request, HttpServletResponse response) {
 		List<Attraction> allSido = tSer.getAllSido();
 		request.setAttribute("dto", allSido);
-		System.out.println(allSido);
 		return "/publicData.jsp";
 	}
 

@@ -27,14 +27,15 @@ public class TripServiceImpl implements TripService {
 	}
 
 	@Override
-	public void getAttractionList(int sidoCode, int contentTypeId) {
-		// TODO Auto-generated method stub
-		
+	public List<Attraction> getAllSido() {
+		return tDao.getAllSido();
 	}
 
 	@Override
-	public List<Attraction> getAllSido() {
-		return tDao.getAllSido();
+	public List<Attraction> tripSearch(Attraction attraction) {
+		// TODO Auto-generated method stub
+		
+		return tDao.getAttractionList(attraction);
 	}
 
 }

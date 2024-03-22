@@ -6,4 +6,5 @@ import com.ssafy.enjoytrip.dto.Attraction;
 
 public interface TripDao {
 	public List<Attraction> getAllSido();
+	public List<Attraction> getAttractionList(Attraction attraction);
 }

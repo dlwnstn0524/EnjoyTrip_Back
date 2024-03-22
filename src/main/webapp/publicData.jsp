@@ -5,11 +5,11 @@
     <%@ taglib prefix="c" uri="jakarta.tags.core" %>
     <div class="container">
 	<div class="col" style="margin-top: 100px">
-        <form role="search" onsubmit="searchPlaces(); return false;">
+        <form role="search" action="enjoytrip?action=tripSearch" method="POST" >
           <div class="row justify-content-center">
             <div class="col-md-3 text-center">
             
-              <select id="search-area" class="form-select mb-3" aria-label="Default select example">
+              <select id="search-area" name="sidoCode" class="form-select mb-3" aria-label="Default select example">
                 <option value="0" selected>검색 할 지역 선택</option>
                 <c:forEach var="sido" items="${dto}">
             	<option value="${sido.sidoCode}">${sido.sidoName}</option>
@@ -20,6 +20,7 @@
               <select
                 id="search-content-id"
                 class="form-select mb-3"
+                name="contentTypeId"
                 aria-label="Default select example"
               >
                 <option value="0" selected>관광지 유형</option>
@@ -38,6 +39,7 @@
                 id="search-keyword"
                 class="form-control mr-2"
                 type="search"
+                name="keyword"
                 placeholder="검색어"
                 aria-label="검색어"
               />

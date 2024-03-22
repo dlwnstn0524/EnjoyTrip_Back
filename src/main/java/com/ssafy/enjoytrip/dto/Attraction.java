@@ -17,6 +17,29 @@ public class Attraction {
 		return "Attraction [sidoCode=" + sidoCode + ", sidoName=" + sidoName + "]";
 	}
 	
+	public Attraction(int contentId, int contentTypeId, String title, String addr, String firstImage, int sidoCode,
+			int gugunCode, String latitude, String longitude) {
+		super();
+		this.contentId = contentId;
+		this.contentTypeId = contentTypeId;
+		this.title = title;
+		this.addr = addr;
+		this.firstImage = firstImage;
+		this.sidoCode = sidoCode;
+		this.gugunCode = gugunCode;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public Attraction(int contentTypeId, String title, int sidoCode) {
+		super();
+		this.contentTypeId = contentTypeId;
+		this.title = title;
+		this.sidoCode = sidoCode;
+	}
+
+
+
 	public Attraction(int sidoCode, String sidoName) {
 		super();
 		this.sidoCode = sidoCode;
