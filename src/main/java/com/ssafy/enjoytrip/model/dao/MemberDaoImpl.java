@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import com.ssafy.enjoytrip.dto.Member;
 import com.ssafy.enjoytrip.exception.AuthenticationException;
@@ -25,7 +26,7 @@ public class MemberDaoImpl implements MemberDao{
 	public void register(Member m) throws SQLException {
 		Connection conn = DBUtil.getConnection();
 		String sql = "insert into member(id, pw, email) "
-				+ " values(?,?,?,?,?)";
+				+ " values(?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.getId());
 		pstmt.setString(2, m.getPw());

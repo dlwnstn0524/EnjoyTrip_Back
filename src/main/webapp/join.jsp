@@ -9,21 +9,21 @@
   <div class="input-form-backgroud row">
     <div class="input-form col-md-12 mx-auto">
       <h4 class="mb-3">회원가입</h4>
-      <form class="validation-form" novalidate>
+      <form action="enjoytrip?action=register" class="validation-form" novalidate method="post">
         <div class="mb-3">
           <label for="name">이름</label>
-          <input type="text" class="form-control" id="name" required />
+          <input type="text" class="form-control" id="name" name="name" required />
         </div>
 
         <div class="mb-3">
           <label for="userid">아이디</label>
-          <input type="text" class="form-control" id="userid" required />
+          <input type="text" class="form-control" id="userid" name="id" required />
           <div class="invalid-feedback">아이디를 입력해주세요.</div>
         </div>
 
         <div class="mb-3">
           <label for="password">비밀번호</label>
-          <input type="password" class="form-control" id="passWord" required />
+          <input type="password" class="form-control" id="passWord" name="pw" required />
           <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
         </div>
 
@@ -40,6 +40,7 @@
             class="form-control"
             placeholder="you@example.com"
             id="email"
+            name="email"
             required
           />
         </div>
@@ -86,42 +87,34 @@
 
 <script>
       function handleSubmit(event) {
-        event.preventDefault(); // 기본 동작 방지
+    	  event.preventDefault(); // 기본 동작 방지
 
-        // 입력된 값 가져오기
-        const name = document.getElementById('name').value;
-        const userid = document.getElementById('userid').value;
-        const passWord = document.getElementById('passWord').value;
-        const checkPassword = document.getElementById('checkPassword').value;
-        const email = document.getElementById('email').value;
-        const region = document.getElementById('region').value;
+    	  // 입력된 값 가져오기
+    	  const name = document.getElementById('name').value;
+    	  const userid = document.getElementById('userid').value;
+    	  const passWord = document.getElementById('passWord').value;
+    	  const checkPassword = document.getElementById('checkPassword').value;
+    	  const email = document.getElementById('email').value;
+    	  const region = document.getElementById('region').value;
 
-        console.log(passWord);
-        if ( passWord != checkPassword) {
-          alert('비밀번호가 일치하지 않습니다.');
-          return;
-        }
-        if (this.checkValidity() === false) {
-          return;
-        }
-        
-        this.classList.add("was-validated");
+    	  console.log(passWord);
+    	  if (passWord != checkPassword) {
+    	    alert('비밀번호가 일치하지 않습니다.');
+    	    return;
+    	  }
 
-        // 사용자 데이터 생성
-        const userData = {
-          name,
-          userid,
-          passWord,
-          email,
-          region,
-        };
+    	  // 여기서 this는 window 객체를 가리키므로, 폼의 유효성 검사를 이렇게 호출할 수 없습니다.
+    	  // 대신 폼 요소를 직접 찾아서 사용합니다.
+    	  const form = document.querySelector(".validation-form"); // 폼 요소 선택
+    	  if (!form.checkValidity()) {
+    	    form.classList.add("was-validated");
+    	    return;
+    	  }
 
-        // localStorage에 데이터 저장
-        localStorage.setItem("register", JSON.stringify(userData));
-
-        // 성공 메시지 표시
-        alert('회원가입이 완료되었습니다.');
-        window.location.href = 'main.html';
+    	  form.action = 'enjoytrip?action=register'; // 폼의 액션 설정
+    	  form.method = 'post'; // 폼 메소드 설정
+    	  alert('회원가입이 완료되었습니다.');
+    	  form.submit(); // 폼 제출
       }
 
       window.addEventListener(
