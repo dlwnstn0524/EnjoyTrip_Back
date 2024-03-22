@@ -32,9 +32,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void login() throws Exception{
+	public void login(String id, String pw) throws Exception{
 		// TODO Auto-generated method stub
-		mDao.login();
+		mDao.login(id, pw);
 	}
 
 	@Override

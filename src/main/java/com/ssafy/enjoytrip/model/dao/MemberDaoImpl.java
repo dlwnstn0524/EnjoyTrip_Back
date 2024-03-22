@@ -2,9 +2,11 @@ package com.ssafy.enjoytrip.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.ssafy.enjoytrip.dto.Member;
+import com.ssafy.enjoytrip.exception.AuthenticationException;
 import com.ssafy.util.DBUtil;
 
 public class MemberDaoImpl implements MemberDao{
@@ -22,7 +24,7 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void register(Member m) throws SQLException {
 		Connection conn = DBUtil.getConnection();
-		String sql = "insert into members(id, pw, email) "
+		String sql = "insert into member(id, pw, email) "
 				+ " values(?,?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.getId());
@@ -39,9 +41,16 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public void login() {
-		
-		
+	public void login(String id, String pw) throws Exception {
+		Connection conn = DBUtil.getConnection();
+		String sql = "SELECT uuid FROM member WHERE id=? and pw=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		pstmt.setString(2, pw);
+		ResultSet rs = pstmt.executeQuery();
+		if (!rs.next()) {
+			throw new AuthenticationException("로그인이 실패했습니다 다시 시도하세요.");
+		}
 	}
 
 	@Override
