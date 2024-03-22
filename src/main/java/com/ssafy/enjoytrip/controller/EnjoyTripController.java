@@ -59,7 +59,7 @@ public class EnjoyTripController extends HttpServlet {
 			} else if (action.equals("login")) {
 				url = login(request, response);
 			} else if (action.equals("logout")) {
-				url = "";
+				url = logout(request, response);
 			} else if (action.equals("modify")) {
 				url = "";
 			} else if (action.equals("delete")) {
@@ -88,6 +88,20 @@ public class EnjoyTripController extends HttpServlet {
 		}
 	}
 	
+	private String logout(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		Cookie[] cookies = request.getCookies();
+		for (Cookie c: cookies) {
+			if (c.getName() == "login") {
+				c.setMaxAge(0);
+				response.addCookie(c);
+			}
+		}
+		return "/enjoytrip?action=init";
+	}
+
 	private String register(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -102,10 +116,15 @@ public class EnjoyTripController extends HttpServlet {
 	private String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");	
+		System.out.println(id + " " + pw);
 		try {
 			mSer.login(id, pw);
 			HttpSession session = request.getSession();
 			session.setAttribute("login", id);
+			
+			Cookie c = new Cookie("login", id);
+			c.setMaxAge(60 * 60);
+			response.addCookie(c);
 		} catch (AuthenticationException e) {
 			return "redirect:/enjoytrip?action=loginFailed";
 		}
