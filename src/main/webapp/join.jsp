@@ -67,7 +67,6 @@
   </footer>
 </div>
  <%@ include file="./assets/commons/footer.jsp" %>
- </body>
      <style>
   .input-form {
     max-width: 680px;
