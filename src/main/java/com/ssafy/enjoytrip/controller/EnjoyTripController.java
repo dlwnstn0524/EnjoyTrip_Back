@@ -60,8 +60,8 @@ public class EnjoyTripController extends HttpServlet {
 				url = login(request, response);
 			} else if (action.equals("logout")) {
 				url = logout(request, response);
-			} else if (action.equals("modify")) {
-				url = "";
+			} else if (action.equals("update")) {
+				url = update(request, response);
 			} else if (action.equals("delete")) {
 				url = "";
 			} else if (action.equals("mvmypage")) {
@@ -89,7 +89,7 @@ public class EnjoyTripController extends HttpServlet {
 			request.getRequestDispatcher(url).forward(request, response);	
 		}
 	}
-	
+
 	private String register(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -132,6 +132,22 @@ public class EnjoyTripController extends HttpServlet {
 			}
 		}
 		return "/enjoytrip?action=init";
+	}
+	
+	
+	private String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("Update");
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String email = request.getParameter("email");
+		String name = request.getParameter("name");
+		Member m = new Member();
+		m.setId(id);
+		m.setPw(pw);
+		m.setEmail(email);
+		m.setName(name);
+		mSer.updateMember(m);
+		return "redirect:/enjoytrip?action=myPage";
 	}
 	
 	private String myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {

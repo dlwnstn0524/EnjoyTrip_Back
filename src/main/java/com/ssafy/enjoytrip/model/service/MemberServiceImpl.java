@@ -38,9 +38,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void modifyMember(String id) throws Exception{
+	public void updateMember(Member m) throws Exception{
 		// TODO Auto-generated method stub
-		mDao.modifyMember(id);
+		mDao.updateMember(m);
 	}
 
 	@Override

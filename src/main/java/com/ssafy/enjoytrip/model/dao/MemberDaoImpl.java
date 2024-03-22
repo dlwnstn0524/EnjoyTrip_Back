@@ -66,9 +66,16 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public void modifyMember(String id) {
+	public void updateMember(Member m) throws Exception {
+		Connection conn = DBUtil.getConnection();
+		String sql = "UPDATE member SET pw=?, email=?, name=? where id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.getPw());
+		pstmt.setString(2, m.getEmail());
+		pstmt.setString(3, m.getName());
+		pstmt.setString(4, m.getId());
 		
-		
+		pstmt.executeUpdate();
 	}
 
 	@Override

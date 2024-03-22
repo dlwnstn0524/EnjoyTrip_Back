@@ -6,21 +6,21 @@
       <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
           <h4 class="mb-3">마이페이지</h4>
-          <form class="validation-form" novalidate>
+          <form action="enjoytrip?action=update" class="validation-form" method="post" novalidate>
             <div class="mb-3">
               <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" value="${m.name }" required />
+              <input type="text" class="form-control" id="name" value="${m.name }" name="name" required />
             </div>
 
             <div class="mb-3">
               <label for="userId">아이디</label>
-              <input type="text" class="form-control" id="userid" value="${m.id }" readonly="readonly" required />
+              <input type="text" class="form-control" id="userid" value="${m.id }" name="id" readonly="readonly" required />
               <div class="invalid-feedback">아이디를 입력해주세요.</div>
             </div>
 
             <div class="mb-3">
               <label for="password">비밀번호</label>
-              <input type="password" class="form-control" id="passWord" required />
+              <input type="password" class="form-control" id="passWord" name="pw" required />
               <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
             </div>
 
@@ -38,6 +38,7 @@
                 placeholder="you@example.com"
                 id="email"
                 value = "${m.email }"
+                name="email"
                 required
               />
             </div>
@@ -66,23 +67,6 @@
     </div>
 	<%@ include file="./assets/commons/footer.jsp" %>
 	
-<script>
-  window.onload = function() {
-    const session = JSON.parse(localStorage.getItem("isLogin"));
-    console.log(session);
-    if (session == true) {
-      const wrapper = document.querySelector("#loginstate");
-      wrapper.setAttribute("style", "display:flex");
-      const wrapper1 = document.querySelector("#logoutstate");
-      wrapper1.setAttribute("style", "display:none");
-    } else {
-      const wrapper = document.querySelector("#logoutstate");
-      wrapper.setAttribute("style", "display:flex");
-      const wrapper1 = document.querySelector("#loginstate");
-      wrapper1.setAttribute("style", "display:none");
-    }
-  }
-</script>
 <style>
       .input-form {
         max-width: 680px;
