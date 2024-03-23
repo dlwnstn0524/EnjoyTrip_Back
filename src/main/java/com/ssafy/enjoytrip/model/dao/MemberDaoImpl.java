@@ -25,20 +25,31 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void register(Member m) throws SQLException {
 		Connection conn = DBUtil.getConnection();
-		String sql = "insert into member(id, pw, email) "
-				+ " values(?,?,?)";
+		String sql = "insert into member(id, pw, email, name) "
+				+ " values(?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.getId());
 		pstmt.setString(2, m.getPw());
 		pstmt.setString(3, m.getEmail());
+		pstmt.setString(4, m.getName());
 		pstmt.executeUpdate();
 		conn.close();	
 	}
 
 	@Override
-	public void myPage() {
+	public Member getMember(String id) throws Exception {
+		Connection conn = DBUtil.getConnection();
+		String sql = "SELECT * FROM member WHERE id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		rs.next();
 		
-		
+		Member m = new Member();
+		m.setId(rs.getString("id"));
+		m.setEmail(rs.getString("email"));
+		m.setName(rs.getString("name"));
+		return m;
 	}
 
 	@Override
@@ -55,14 +66,35 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public void modifyMember(String id) {
+	public void updateMember(Member m) throws Exception {
+		Connection conn = DBUtil.getConnection();
+		String sql = "UPDATE member SET pw=?, email=?, name=? where id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.getPw());
+		pstmt.setString(2, m.getEmail());
+		pstmt.setString(3, m.getName());
+		pstmt.setString(4, m.getId());
 		
-		
+		pstmt.executeUpdate();
 	}
 
 	@Override
-	public void deleteMember(String id) {
-		
+	public void deleteMember(String id, String pw) throws Exception {
+		System.out.println("delete id: " + id + " pw: " + pw);
+		Connection conn = DBUtil.getConnection();
+		String sql = "SELECT uuid FROM member WHERE id=? and pw=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		pstmt.setString(2, pw);
+		ResultSet rs = pstmt.executeQuery();
+		if (!rs.next()) {
+			throw new AuthenticationException("알맞지 않은 입력입니다. 다시 시도하세요.");
+		}
+		sql = "delete from members where id = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		pstmt.executeUpdate();
+		conn.close();
 	}
 
 }

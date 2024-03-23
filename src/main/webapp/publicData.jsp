@@ -4,6 +4,8 @@
     <%@ include file="./assets/commons/header.jsp" %>
     <%@ taglib prefix="c" uri="jakarta.tags.core" %>
     <div class="container">
+    <div id="info" data= '${markerInfoData}' style="display:none;">
+    </div>
 	<div class="col" style="margin-top: 100px">
         <form role="search" action="enjoytrip?action=tripSearch" method="POST" >
           <div class="row justify-content-center">

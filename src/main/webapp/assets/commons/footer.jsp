@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <footer class="navbar navbar-expand-lg navbar-light bg-light justify-content-around">
       <div>
-        <img src="/assets/img/footer.png" alt="" width="70px" />
+        <img src="./assets/img/footer.png" alt="" width="70px" />
       </div>
       <div class="row">
         <ul class="navbar-nav">
