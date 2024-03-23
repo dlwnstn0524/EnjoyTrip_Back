@@ -65,6 +65,9 @@ public class EnjoyTripController extends HttpServlet {
 				url = register(request, response);
 			} else if (action.equals("login")) {
 				url = login(request, response);
+			} else if (action.equals("loginFailed")) {
+				System.out.println("Failed");
+				url = "";
 			} else if (action.equals("logout")) {
 				url = logout(request, response);
 			} else if (action.equals("update")) {
@@ -155,8 +158,10 @@ public class EnjoyTripController extends HttpServlet {
 			c.setMaxAge(60 * 60);
 			response.addCookie(c);
 		} catch (AuthenticationException e) {
-			return "redirect:/enjoytrip?action=loginFailed";
+			request.getSession().setAttribute("loginError", "아이디 또는 비밀번호가 잘못되었습니다.");
+			
 		}
+		System.out.println(request.getQueryString());
 		return "redirect:/enjoytrip?action=init";
 	}
 	
@@ -171,7 +176,7 @@ public class EnjoyTripController extends HttpServlet {
 				response.addCookie(c);
 			}
 		}
-		return "/enjoytrip?action=init";
+		return "redirect:/enjoytrip?action=init";
 	}
 	
 	
@@ -195,7 +200,8 @@ public class EnjoyTripController extends HttpServlet {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		mSer.deleteMember(id, pw);
-		return "redirect:/enjoytrip?action=init";
+
+		return logout(request, response);
 	}
 	
 	private String myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {

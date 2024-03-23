@@ -38,7 +38,7 @@
                 placeholder="you@example.com"
                 id="email"
                 value = "${m.email }"
-                name="email"
+                name="email" 
                 required
               />
             </div>
@@ -49,12 +49,14 @@
             </div>
 
             <div class="row mr-auto" style="float: right">
-              <div class="col">
-                <label for="name"></label>
+              <div class="col-auto">
                 <input type="submit" class="btn btn-outline-primary" value="수정"></input>
               </div>
               <div class="col">
+<<<<<<< HEAD
                 <label for="name"></label>
+=======
+>>>>>>> main
                 <input type="button" class="btn btn-outline-success" value="회원탈퇴" 
                   data-bs-toggle="modal" data-bs-target="#profileDeleteModal"></input>
               </div>
@@ -114,7 +116,7 @@
                   type="text"
                   class="form-control"
                   id="deleteEmail"
-                  placeholder="Enter email"
+                  placeholder="Enter ID"
                   name = "id"
                 />
               </div>
@@ -133,7 +135,7 @@
               </div>
               <button
                 type="submit"
-                class="btn btn-success btn-block w-100"
+                class="btn btn-danger btn-block w-100"
                 id="deleteButton"
               >
                 <span class="glyphicon glyphicon-off"></span> 삭제하기

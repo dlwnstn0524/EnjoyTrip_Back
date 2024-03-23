@@ -74,7 +74,14 @@
             </c:if>
             <!-- 로그인 후 -->
             <c:if test="${login!=null }">
+<<<<<<< HEAD
             <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="loginstate">
+=======
+            <ul class="navbar-nav mb-2 me-2 mb-lg-0 d-flex align-items-center" id="loginstate">
+              <li class="nav-item ">
+                ${login }님 어서오세요. 
+              </li>
+>>>>>>> main
               <li class="nav-item">
                 ${login }님 어서오세요. 
                 
@@ -127,6 +134,7 @@
                 <input type="password" class="form-control" id="inputPw" name="pw" required />
                 <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
               </div>
+              <div id="loginErrorMessage" class="alert alert-danger" style="display: none;"></div>
             </div>
             <div class="justify-content-end">
               <div class="d-flex justify-content-end me-2 mb-2">
@@ -141,19 +149,129 @@
                     로그인
                   </button>
                 </div>
-                <div class="">
+<!--                 <div class="">
                   <label for="findId"></label>
                   <button type="submit" class="btn btn-outline-success">ID찾기</button>
-                </div>
+                </div> -->
                 <div class="">
                   <label for="findPassword"></label>
-                  <button type="submit" class="btn btn-outline-secondary">PW찾기</button>
+                  <button type="button" class="btn btn-outline-secondary"
+                  data-bs-toggle="modal" data-bs-target="#passwordFindModal">PW찾기</button>
                 </div>
               </div>
             </div>
+            <!-- 로그인 실패 표시 -->
+            <c:if test="${not empty sessionScope.loginError}">
+            	<% System.out.println("Failed~!!"); %>
+			    <script>
+					window.alert("${loginError}");
+			    </script>
+			    <c:remove var="loginError" scope="session" />
+			</c:if>
           </div>
         </div>
         </form>
       </div>
+    <!-- 비밀번호 찾기 모달 -->
+    <div
+      class="modal fade"
+      id="passwordFindModal"
+      role="dialog"
+      style="position: absolute;"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="d-flex justify-content-center">
+            <div
+              class="modal-header ms-auto me me-auto text-center"
+              style="padding: 30px 40px 10px 40px"
+            >
+              <h4><span class="glyphicon glyphicon-lock"></span>비밀번호 찾기</h4>
+            </div>
+          </div>
+
+          <div class="modal-body" style="padding: 40px 50px">
+            <form role="form">
+              <div class="form-group mb-2">
+                <label for="loginEmail"
+                  ><span class="glyphicon glyphicon-user"></span>이메일</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="deleteEmail"
+                  placeholder="Enter Email"
+                  name = "email"
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary btn-block w-100"
+                id="sendButton"
+                data-bs-toggle="modal" data-bs-target="#codeModal"
+              >
+                <span class="glyphicon glyphicon-off"></span> 보내기
+              </button>
+            </form>
+          </div>
+          <script>
+			  document.addEventListener("DOMContentLoaded", function() {
+			    var deleteButton = document.getElementById("sendButton");
+	
+			    deleteButton.addEventListener("click", function() {
+			      alert("이메일로 인증코드를 보냈습니다.");
+			    });
+			  });
+			</script>
+        </div>
+      </div>
+    </div>
+    <!-- 비밀번호 찾기 모달 끝 -->
+    <!-- 인증 코드 모달 -->
+    <div
+      class="modal fade"
+      id="codeModal"
+      role="dialog"
+      style="position: absolute;"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="d-flex justify-content-center">
+            <div
+              class="modal-header ms-auto me me-auto text-center"
+              style="padding: 30px 40px 10px 40px"
+            >
+              <h4><span class="glyphicon glyphicon-lock"></span>코드 입력</h4>
+            </div>
+          </div>
+
+          <div class="modal-body" style="padding: 40px 50px">
+            <form role="form">
+              <div class="form-group mb-2">
+                <label for="loginEmail"
+                  ><span class="glyphicon glyphicon-user"></span>이메일로 전송된 코드를 입력하세요.</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="code"
+                  placeholder="Enter Code"
+                  name = "code"
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-success btn-block w-100"
+                id="sendCode"
+              >
+                <span class="glyphicon glyphicon-off"></span> 보내기
+              </button>
+            </form>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+    <!-- 인증 코드 모달 끝 -->
     </div>
     <!--상단바 끝-->
