@@ -50,7 +50,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="enjoytrip?action=">지역별관광지</a>
+                <a class="nav-link" aria-current="page" href="enjoytrip?action=local">지역별관광지</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="enjoytrip?action=">나의여행계획</a>
