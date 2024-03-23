@@ -75,10 +75,9 @@
             </c:if>
             <!-- 로그인 후 -->
             <c:if test="${login!=null }">
-            <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="loginstate">
-              <li class="nav-item">
+            <ul class="navbar-nav mb-2 me-2 mb-lg-0 d-flex align-items-center" id="loginstate">
+              <li class="nav-item ">
                 ${login }님 어서오세요. 
-                
               </li>
               <li class="nav-item">
                 <a
@@ -128,6 +127,7 @@
                 <input type="password" class="form-control" id="inputPw" name="pw" required />
                 <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
               </div>
+              <div id="loginErrorMessage" class="alert alert-danger" style="display: none;"></div>
             </div>
             <div class="justify-content-end">
               <div class="d-flex justify-content-end me-2 mb-2">
@@ -152,6 +152,14 @@
                 </div>
               </div>
             </div>
+            <!-- 로그인 실패 표시 -->
+            <c:if test="${not empty sessionScope.loginError}">
+            	<% System.out.println("Failed~!!"); %>
+			    <script>
+					window.alert("${loginError}");
+			    </script>
+			    <c:remove var="loginError" scope="session" />
+			</c:if>
           </div>
         </div>
         </form>

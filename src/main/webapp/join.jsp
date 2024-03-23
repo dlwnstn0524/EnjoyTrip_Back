@@ -50,16 +50,14 @@
           <input type="text" class="form-control" id="region" required />
         </div>
 
-        <div class="row mr-auto" style="float: right">
-          <div class="col">
-            <label for="name"></label>
-            <input type="submit" class="btn btn-outline-primary"></input>
-          </div>
-          <div class="col">
-            <label for="name"></label>
-            <input type="reset" class="btn btn-outline-success"></input>
-          </div>
-        </div>
+		<div class="row mr-auto d-flex align-items-center" style="text-align: right">
+		    <div class="col-10"> 
+		        <input type="submit" class="btn btn-outline-primary" value="가입"></input>
+		    </div>
+		    <div class="col-auto">
+		        <input type="reset" class="btn btn-outline-success"></input>
+		    </div>
+		</div>
       </form>
     </div>
   </div>
