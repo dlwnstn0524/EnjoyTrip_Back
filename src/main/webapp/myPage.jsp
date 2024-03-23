@@ -38,7 +38,7 @@
                 placeholder="you@example.com"
                 id="email"
                 value = "${m.email }"
-                name="email"
+                name="email" 
                 required
               />
             </div>
