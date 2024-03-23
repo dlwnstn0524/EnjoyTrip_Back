@@ -26,9 +26,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void myPage() throws Exception{
+	public Member getMember(String id) throws Exception {
 		// TODO Auto-generated method stub
-		mDao.myPage();
+		return mDao.getMember(id);
 	}
 
 	@Override
@@ -38,15 +38,15 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void modifyMember(String id) throws Exception{
+	public void updateMember(Member m) throws Exception{
 		// TODO Auto-generated method stub
-		mDao.modifyMember(id);
+		mDao.updateMember(m);
 	}
 
 	@Override
-	public void deleteMember(String id) throws Exception {
+	public void deleteMember(String id, String pw) throws Exception {
 		// TODO Auto-generated method stub
-		mDao.deleteMember(id);
+		mDao.deleteMember(id, pw);
 	}
 
 }

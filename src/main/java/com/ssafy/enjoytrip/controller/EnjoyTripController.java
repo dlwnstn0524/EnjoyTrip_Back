@@ -65,13 +65,15 @@ public class EnjoyTripController extends HttpServlet {
 			} else if (action.equals("login")) {
 				url = login(request, response);
 			} else if (action.equals("logout")) {
-				url = "";
-			} else if (action.equals("modify")) {
-				url = "";
+				url = logout(request, response);
+			} else if (action.equals("update")) {
+				url = update(request, response);
 			} else if (action.equals("delete")) {
-				url = "";
+				url = delete(request, response);
+			} else if (action.equals("mvmypage")) {
+				url = myPage(request, response);
 			} else if (action.equals("mypage")) {
-				url = "";
+				url = "/myPage.jsp";
 			} else if (action.equals("init")) {
 				url = "/index.jsp";
 			} else if (action.equals("local")) {
@@ -97,6 +99,8 @@ public class EnjoyTripController extends HttpServlet {
 			request.getRequestDispatcher(url).forward(request, response);	
 		}
 	}
+
+
 	
 	private String tripSearch(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -115,12 +119,14 @@ public class EnjoyTripController extends HttpServlet {
 		return "/publicData.jsp";
 	}
 
+
 	private String register(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String email = request.getParameter("email");
+		String name = request.getParameter("name");
 		System.out.println(id + " " + pw + " " + email);
-		mSer.register(new Member(id, pw, email));
+		mSer.register(new Member(id, pw, email, name));
 		// register 주소 매핑
 		// 이후 마이페이지로 수정?
 		return "/enjoytrip?action=index.jsp";
@@ -129,13 +135,63 @@ public class EnjoyTripController extends HttpServlet {
 	private String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");	
+		System.out.println(id + " " + pw);
 		try {
 			mSer.login(id, pw);
 			HttpSession session = request.getSession();
 			session.setAttribute("login", id);
+			
+			Cookie c = new Cookie("login", id);
+			c.setMaxAge(60 * 60);
+			response.addCookie(c);
 		} catch (AuthenticationException e) {
 			return "redirect:/enjoytrip?action=loginFailed";
 		}
 		return "redirect:/enjoytrip?action=init";
+	}
+	
+	private String logout(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		Cookie[] cookies = request.getCookies();
+		for (Cookie c: cookies) {
+			if (c.getName() == "login") {
+				c.setMaxAge(0);
+				response.addCookie(c);
+			}
+		}
+		return "/enjoytrip?action=init";
+	}
+	
+	
+	private String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("Update");
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String email = request.getParameter("email");
+		String name = request.getParameter("name");
+		Member m = new Member();
+		m.setId(id);
+		m.setPw(pw);
+		m.setEmail(email);
+		m.setName(name);
+		mSer.updateMember(m);
+		return "redirect:/enjoytrip?action=myPage";
+	}
+	
+	private String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("Delete");
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		mSer.deleteMember(id, pw);
+		return "redirect:/enjoytrip?action=init";
+	}
+	
+	private String myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Member m = mSer.getMember((String)request.getSession().getAttribute("login"));
+		request.setAttribute("m", m);
+		System.out.println(m);
+		return "/enjoytrip?action=mypage";
 	}
 }

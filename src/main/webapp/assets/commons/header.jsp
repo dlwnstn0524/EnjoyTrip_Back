@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,7 +32,7 @@
     <div id="header">
       <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
         <div class="container">
-          <a class="navbar-brand text-primary fw-bold" href="main.html">
+          <a class="navbar-brand text-primary fw-bold" href="enjoytrip?action=init">
             <img src="./assets/img/logo.PNG" alt="" width="60" />
             EnjoyTrip!
           </a>
@@ -59,6 +62,7 @@
                 <a class="nav-link" aria-current="page" href="#">여행정보공유</a>
               </li>
             </ul>
+            <c:if test="${login==null }">
             <!-- 로그인 전 -->
             <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="logoutstate">
               <li class="nav-item">
@@ -68,21 +72,27 @@
                 <a class="nav-link" aria-current="page" href="#">로그인</a>
               </li>
             </ul>
+            </c:if>
             <!-- 로그인 후 -->
+            <c:if test="${login!=null }">
             <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="loginstate">
+              <li class="nav-item">
+                ${login }님 어서오세요. 
+                
+              </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
                   aria-current="page"
-                  href="/main.html"
-                  onclick="javascript:logout();"
-                  >로그아웃</a
+                  href="enjoytrip?action=logout"
+                  > 로그아웃</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="mypage.html">마이페이지</a>
+                <a class="nav-link" aria-current="page" href="enjoytrip?action=mvmypage">마이페이지</a>
               </li>
             </ul>
+            </c:if>
           </div>
         </div>
       </nav>
@@ -94,6 +104,7 @@
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
+        <form action="enjoytrip?action=login" method="post">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -108,13 +119,13 @@
             <div class="modal-body">
               <div class="mb-3">
                 <label for="inputId">아이디 : </label>
-                <input type="text" class="form-control" id="inputId" required />
+                <input type="text" class="form-control" id="inputId" name="id" required />
                 <div class="invalid-feedback">아이디를 입력해주세요.</div>
               </div>
 
               <div class="mb-3">
                 <label for="inputPw">비밀번호 : </label>
-                <input type="password" class="form-control" id="inputPw" required />
+                <input type="password" class="form-control" id="inputPw" name="pw" required />
                 <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
               </div>
             </div>
@@ -143,6 +154,7 @@
             </div>
           </div>
         </div>
+        </form>
       </div>
     </div>
     <!--상단바 끝-->
