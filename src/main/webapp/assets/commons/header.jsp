@@ -25,7 +25,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Enjoy Your Trip!</title>
-    <!-- <script src="./assets/js/component.js"></script> -->
   </head>
   <body>
     <!--상단바 시작-->
@@ -75,9 +74,17 @@
             </c:if>
             <!-- 로그인 후 -->
             <c:if test="${login!=null }">
+<<<<<<< HEAD
+            <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="loginstate">
+=======
             <ul class="navbar-nav mb-2 me-2 mb-lg-0 d-flex align-items-center" id="loginstate">
               <li class="nav-item ">
                 ${login }님 어서오세요. 
+              </li>
+>>>>>>> main
+              <li class="nav-item">
+                ${login }님 어서오세요. 
+                
               </li>
               <li class="nav-item">
                 <a
@@ -262,6 +269,7 @@
             </form>
           </div>
         </div>
+        </form>
       </div>
     </div>
     <!-- 인증 코드 모달 끝 -->

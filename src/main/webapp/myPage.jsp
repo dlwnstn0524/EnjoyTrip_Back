@@ -53,6 +53,10 @@
                 <input type="submit" class="btn btn-outline-primary" value="수정"></input>
               </div>
               <div class="col">
+<<<<<<< HEAD
+                <label for="name"></label>
+=======
+>>>>>>> main
                 <input type="button" class="btn btn-outline-success" value="회원탈퇴" 
                   data-bs-toggle="modal" data-bs-target="#profileDeleteModal"></input>
               </div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./assets/commons/header.jsp" %>
+
  <!--사진 부분 시작-->
     <div style="margin-top: 10px">
       <div class="card">

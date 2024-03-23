@@ -12,11 +12,6 @@ public class Attraction {
 	String latitude;
 	String longitude;
 	
-	@Override
-	public String toString() {
-		return "Attraction [sidoCode=" + sidoCode + ", sidoName=" + sidoName + "]";
-	}
-	
 	public Attraction(int contentId, int contentTypeId, String title, String addr, String firstImage, int sidoCode,
 			int gugunCode, String latitude, String longitude) {
 		super();

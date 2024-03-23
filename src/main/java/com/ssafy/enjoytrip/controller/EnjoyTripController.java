@@ -1,18 +1,11 @@
 package com.ssafy.enjoytrip.controller;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
-import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.enjoytrip.dto.Attraction;
 import com.ssafy.enjoytrip.dto.Member;
 import com.ssafy.enjoytrip.exception.AuthenticationException;
@@ -22,6 +15,14 @@ import com.ssafy.enjoytrip.model.service.MemberService;
 import com.ssafy.enjoytrip.model.service.MemberServiceImpl;
 import com.ssafy.enjoytrip.model.service.TripService;
 import com.ssafy.enjoytrip.model.service.TripServiceImpl;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/enjoytrip")
 public class EnjoyTripController extends HttpServlet {
@@ -112,8 +113,17 @@ public class EnjoyTripController extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		Attraction dto = new Attraction(contentTypeId, keyword, sidoCode);
 		List<Attraction> list = tSer.tripSearch(dto);
-		System.out.println(list);
-		return "/enjoytrip?action=index.jsp";
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			String json = objectMapper.writeValueAsString(list);
+			System.out.println(list);
+			request.setAttribute("markerInfoData", json);
+			return "/enjoytrip?action=local";
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	private String local(HttpServletRequest request, HttpServletResponse response) {
@@ -190,6 +200,7 @@ public class EnjoyTripController extends HttpServlet {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		mSer.deleteMember(id, pw);
+
 		return logout(request, response);
 	}
 	

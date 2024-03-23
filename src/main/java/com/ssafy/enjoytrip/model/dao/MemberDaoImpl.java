@@ -90,6 +90,7 @@ public class MemberDaoImpl implements MemberDao{
 		if (!rs.next()) {
 			throw new AuthenticationException("알맞지 않은 입력입니다. 다시 시도하세요.");
 		}
+
 		sql = "delete from member where id = ?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
